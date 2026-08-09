@@ -10,6 +10,7 @@ function App() {
   const [recentEvents, setRecentEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [simulating, setSimulating] = useState(false);
 
   useEffect(() => {
     fetchDashboardData();
@@ -26,13 +27,18 @@ function App() {
 
   const fetchDashboardData = async () => {
     try {
+      console.log('Fetching dashboard data...');
       const response = await fetch(`${API_BASE_URL}/dashboard`);
-      if (!response.ok) throw new Error('Failed to fetch dashboard data');
+      if (!response.ok) {
+        throw new Error(`Dashboard API error: ${response.status}`);
+      }
       
       const data = await response.json();
+      console.log('Dashboard data received:', data);
       setDashboardData(data.data);
       setLoading(false);
     } catch (err) {
+      console.error('Dashboard fetch error:', err);
       setError(err.message);
       setLoading(false);
       // Use mock data for demo if API not available
@@ -42,20 +48,27 @@ function App() {
 
   const fetchRecentEvents = async () => {
     try {
+      console.log('Fetching recent events...');
       const response = await fetch(`${API_BASE_URL}/events?hours=24&limit=10`);
-      if (!response.ok) throw new Error('Failed to fetch events');
+      if (!response.ok) {
+        throw new Error(`Events API error: ${response.status}`);
+      }
       
       const data = await response.json();
+      console.log('Events data received:', data);
       setRecentEvents(data.events || []);
     } catch (err) {
-      console.error('Failed to fetch events:', err);
+      console.error('Events fetch error:', err);
       // Use mock data for demo
       setRecentEvents(getMockEvents());
     }
   };
 
   const simulateEvent = async (eventType = 'suspicious') => {
+    setSimulating(true);
     try {
+      console.log(`Starting ${eventType} event simulation...`);
+      
       const eventData = {
         event_type: 'authentication',
         action: 'login_attempt',
@@ -75,14 +88,26 @@ function App() {
       });
 
       if (response.ok) {
-        // Refresh data after simulation
-        setTimeout(() => {
-          fetchDashboardData();
-          fetchRecentEvents();
-        }, 1000);
+        const result = await response.json();
+        console.log('Simulation result:', result);
+        
+        // Immediately refresh data after simulation
+        console.log('Refreshing dashboard and events...');
+        await Promise.all([
+          fetchDashboardData(),
+          fetchRecentEvents()
+        ]);
+        
+        console.log('Data refresh complete');
+      } else {
+        console.error('Simulation failed with status:', response.status);
+        const errorText = await response.text();
+        console.error('Error details:', errorText);
       }
     } catch (err) {
       console.error('Failed to simulate event:', err);
+    } finally {
+      setSimulating(false);
     }
   };
 
@@ -215,16 +240,23 @@ function App() {
             <button 
               className="demo-btn suspicious"
               onClick={() => simulateEvent('suspicious')}
+              disabled={simulating}
             >
-              Simulate Suspicious Event
+              {simulating ? 'Analyzing...' : 'Simulate Suspicious Event'}
             </button>
             <button 
               className="demo-btn normal"
               onClick={() => simulateEvent('normal')}
+              disabled={simulating}
             >
-              Simulate Normal Event
+              {simulating ? 'Analyzing...' : 'Simulate Normal Event'}
             </button>
           </div>
+          {simulating && (
+            <div style={{marginTop: '10px', color: '#f59e0b'}}>
+              🔍 Sentinel is analyzing the event and correlating with historical data...
+            </div>
+          )}
         </div>
 
         {/* Recent Events */}

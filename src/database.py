@@ -126,29 +126,62 @@ class SentinelDatabase:
     
     async def find_similar_events(self, embedding: List[float], 
                                  days_back: int = 90, limit: int = 10) -> List[Dict]:
-        """Find similar events using vector similarity search"""
-        query = """
-        SELECT 
-            event_id,
-            user_id,
-            event_type,
-            source_ip,
-            action,
-            timestamp,
-            raw_log,
-            embedding <-> $1 as distance
-        FROM events 
-        WHERE timestamp > $2
-        ORDER BY distance 
-        LIMIT $3
-        """
-        
-        cutoff_date = datetime.utcnow() - timedelta(days=days_back)
-        
-        async with self.pool.acquire() as conn:
-            rows = await conn.fetch(query, embedding, cutoff_date, limit)
-        
-        return [dict(row) for row in rows]
+        """Find similar events using cosine similarity"""
+        try:
+            # First get recent events with their embeddings
+            query = """
+            SELECT 
+                event_id,
+                user_id,
+                event_type,
+                source_ip,
+                action,
+                timestamp,
+                raw_log,
+                embedding
+            FROM events 
+            WHERE timestamp > $1 AND embedding IS NOT NULL
+            ORDER BY timestamp DESC
+            LIMIT 100
+            """
+            
+            cutoff_date = datetime.utcnow() - timedelta(days=days_back)
+            
+            async with self.pool.acquire() as conn:
+                rows = await conn.fetch(query, cutoff_date)
+            
+            # Calculate cosine similarity in Python
+            similar_events = []
+            query_embedding = np.array(embedding)
+            
+            for row in rows:
+                try:
+                    event_embedding = np.array(row['embedding'])
+                    
+                    # Calculate cosine similarity
+                    dot_product = np.dot(query_embedding, event_embedding)
+                    norm_query = np.linalg.norm(query_embedding)
+                    norm_event = np.linalg.norm(event_embedding)
+                    
+                    if norm_query > 0 and norm_event > 0:
+                        similarity = dot_product / (norm_query * norm_event)
+                        distance = 1 - similarity  # Convert to distance
+                        
+                        event_dict = dict(row)
+                        event_dict['distance'] = float(distance)
+                        similar_events.append(event_dict)
+                
+                except (ValueError, TypeError) as e:
+                    logger.warning(f"Error calculating similarity for event {row['event_id']}: {e}")
+                    continue
+            
+            # Sort by distance and limit results
+            similar_events.sort(key=lambda x: x['distance'])
+            return similar_events[:limit]
+            
+        except Exception as e:
+            logger.error(f"Error in find_similar_events: {e}")
+            return []
     
     async def insert_decision(self, event_id: str, threat_score: float, 
                             reasoning: str, action_taken: str, 

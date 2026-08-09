@@ -144,6 +144,8 @@ class SentinelAgent:
             
         except Exception as e:
             logger.error(f"Error processing event: {e}")
+            import traceback
+            logger.error(f"Full traceback: {traceback.format_exc()}")
             end_time = datetime.utcnow()
             result["processing_time_ms"] = (end_time - start_time).total_seconds() * 1000
             result["reasoning"] = f"Processing error: {str(e)}"

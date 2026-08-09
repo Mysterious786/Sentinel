@@ -1,0 +1,910 @@
+{
+  "timestamp": "2026-08-09T10:17:01.694481",
+  "test_config": {
+    "num_users": 100,
+    "api_base": "http://localhost:8000"
+  },
+  "results": [
+    {
+      "user_id": 1,
+      "username": "user001@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 8.492506742477417,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 2,
+      "username": "user002@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.469933032989502,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 3,
+      "username": "user003@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.928406953811646,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 4,
+      "username": "user004@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.93120789527893,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 5,
+      "username": "user005@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 11.551027774810791,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 6,
+      "username": "user006@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 5.31162691116333,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 7,
+      "username": "user007@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 15.251134157180786,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 8,
+      "username": "user008@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 5.7677600383758545,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 9,
+      "username": "user009@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 15.241624116897583,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 10,
+      "username": "user010@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 15.242534875869751,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 11,
+      "username": "user011@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 6.756948947906494,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 12,
+      "username": "user012@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 15.240500926971436,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 13,
+      "username": "user013@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 17.36839985847473,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 14,
+      "username": "user014@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 6.9587109088897705,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 15,
+      "username": "user015@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 8.62425184249878,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 16,
+      "username": "user016@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 5.968961000442505,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 17,
+      "username": "user017@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 8.843646049499512,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 18,
+      "username": "user018@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.133588075637817,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 19,
+      "username": "user019@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 5.8215320110321045,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 20,
+      "username": "user020@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.41716480255127,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 21,
+      "username": "user021@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.427862882614136,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 22,
+      "username": "user022@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.42378306388855,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 23,
+      "username": "user023@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 7.286482810974121,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 24,
+      "username": "user024@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 10.887674808502197,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 25,
+      "username": "user025@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 7.586763858795166,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 26,
+      "username": "user026@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 4.917078018188477,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 27,
+      "username": "user027@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 8.349567890167236,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 28,
+      "username": "user028@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 8.056210994720459,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 29,
+      "username": "user029@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 6.885718584060669,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 30,
+      "username": "user030@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.218313932418823,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 31,
+      "username": "user031@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 8.637153148651123,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 32,
+      "username": "user032@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.446572065353394,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 33,
+      "username": "user033@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 8.555259943008423,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 34,
+      "username": "user034@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 8.94511604309082,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 35,
+      "username": "user035@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 11.157147884368896,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 36,
+      "username": "user036@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 11.46181607246399,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 37,
+      "username": "user037@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 7.8829591274261475,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 38,
+      "username": "user038@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 8.468101978302002,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 39,
+      "username": "user039@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 6.525688886642456,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 40,
+      "username": "user040@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 6.527525901794434,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 41,
+      "username": "user041@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.318940162658691,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 42,
+      "username": "user042@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.90392804145813,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 43,
+      "username": "user043@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.612949132919312,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 44,
+      "username": "user044@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 7.556074857711792,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 45,
+      "username": "user045@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.080668926239014,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 46,
+      "username": "user046@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 12.460169792175293,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 47,
+      "username": "user047@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 8.294883012771606,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 48,
+      "username": "user048@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.157978057861328,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 49,
+      "username": "user049@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.42523980140686,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 50,
+      "username": "user050@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.432399272918701,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 51,
+      "username": "user051@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 10.892242908477783,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 52,
+      "username": "user052@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.449817895889282,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 53,
+      "username": "user053@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 10.666938781738281,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 54,
+      "username": "user054@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 7.6906938552856445,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 55,
+      "username": "user055@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 11.559653759002686,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 56,
+      "username": "user056@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 12.70324993133545,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 57,
+      "username": "user057@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 6.252852916717529,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 58,
+      "username": "user058@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.825186967849731,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 59,
+      "username": "user059@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 9.529167175292969,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 60,
+      "username": "user060@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 9.529634237289429,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 61,
+      "username": "user061@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 7.3495728969573975,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 62,
+      "username": "user062@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 10.659525156021118,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 63,
+      "username": "user063@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 10.65770435333252,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 64,
+      "username": "user064@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 7.12141489982605,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 65,
+      "username": "user065@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 8.24674105644226,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 66,
+      "username": "user066@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 8.659521102905273,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 67,
+      "username": "user067@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 10.687739133834839,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 68,
+      "username": "user068@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 7.355665922164917,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 69,
+      "username": "user069@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 7.3750832080841064,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 70,
+      "username": "user070@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 9.182454109191895,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 71,
+      "username": "user071@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 10.022631168365479,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 72,
+      "username": "user072@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 7.6506500244140625,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 73,
+      "username": "user073@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 8.03073000907898,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 74,
+      "username": "user074@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 10.406692743301392,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 75,
+      "username": "user075@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 10.41358208656311,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 76,
+      "username": "user076@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 8.035974740982056,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 77,
+      "username": "user077@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 9.576702117919922,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 78,
+      "username": "user078@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 6.5710437297821045,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 79,
+      "username": "user079@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 9.05252981185913,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 80,
+      "username": "user080@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 7.246511697769165,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 81,
+      "username": "user081@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 7.421402215957642,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 82,
+      "username": "user082@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 7.4303648471832275,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 83,
+      "username": "user083@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 10.480382919311523,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 84,
+      "username": "user084@sentinel.local",
+      "threat_type": "medium_threat",
+      "success": true,
+      "response_time": 9.257851123809814,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 85,
+      "username": "user085@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 9.258488893508911,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 86,
+      "username": "user086@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 10.320204019546509,
+      "action": "monitor",
+      "threat_score": 4.0
+    },
+    {
+      "user_id": 87,
+      "username": "user087@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 11.092138051986694,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 88,
+      "username": "user088@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 6.308192014694214,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 89,
+      "username": "user089@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 7.8692381381988525,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 90,
+      "username": "user090@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 7.864869832992554,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 91,
+      "username": "user091@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 9.386005163192749,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 92,
+      "username": "user092@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 11.399910926818848,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 93,
+      "username": "user093@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 7.939101934432983,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 94,
+      "username": "user094@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 10.832802057266235,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 95,
+      "username": "user095@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 10.84047794342041,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 96,
+      "username": "user096@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 7.172348737716675,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 97,
+      "username": "user097@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 9.448119163513184,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 98,
+      "username": "user098@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 5.871963977813721,
+      "action": "monitor",
+      "threat_score": 2.0
+    },
+    {
+      "user_id": 99,
+      "username": "user099@sentinel.local",
+      "threat_type": "high_threat",
+      "success": true,
+      "response_time": 6.149955987930298,
+      "action": "alert",
+      "threat_score": 5.0
+    },
+    {
+      "user_id": 100,
+      "username": "user100@sentinel.local",
+      "threat_type": "low_threat",
+      "success": true,
+      "response_time": 6.9140400886535645,
+      "action": "alert",
+      "threat_score": 5.0
+    }
+  ],
+  "errors": []
+}

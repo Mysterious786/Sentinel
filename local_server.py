@@ -44,10 +44,20 @@ def convert_for_json(obj):
 @middleware
 async def cors_handler(request, handler):
     """CORS middleware for local development"""
+    # Handle preflight OPTIONS requests
+    if request.method == 'OPTIONS':
+        response = web.Response()
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PUT, DELETE'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With'
+        response.headers['Access-Control-Max-Age'] = '86400'
+        return response
+    
+    # Handle actual requests
     response = await handler(request)
     response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PUT, DELETE'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With'
     return response
 
 
@@ -206,6 +216,12 @@ async def create_app():
     app.router.add_get('/events', handle_events)
     app.router.add_post('/simulate', handle_simulate)
     app.router.add_get('/status', handle_status)
+    
+    # Add OPTIONS handlers for CORS preflight
+    app.router.add_options('/dashboard', lambda r: web.Response())
+    app.router.add_options('/events', lambda r: web.Response())
+    app.router.add_options('/simulate', lambda r: web.Response())
+    app.router.add_options('/status', lambda r: web.Response())
     
     # Health check
     app.router.add_get('/health', lambda r: web.json_response({"status": "healthy"}))

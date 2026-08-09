@@ -17,20 +17,27 @@ class ReasoningAgent:
     def __init__(self, region: str = "us-east-1"):
         self.region = region
         self.bedrock_client = boto3.client("bedrock-runtime", region_name=region)
-        self.model_id = "anthropic.claude-3-5-haiku-20241022-v1:0"
+        self.model_id = "anthropic.claude-3-haiku-20240307-v1:0"
     
     def format_event_for_analysis(self, event: Dict[Any, Any]) -> str:
         """Format event data for Claude analysis"""
+        raw_log_str = json.dumps(event.get('raw_log', {}), indent=2)
+        event_type = event.get('event_type', 'unknown')
+        source_ip = event.get('source_ip', 'unknown')
+        action = event.get('action', 'unknown')
+        timestamp = event.get('timestamp', 'unknown')
+        username = event.get('username', 'unknown')
+        
         formatted = f"""
 Event Details:
-- Type: {event.get('event_type', 'unknown')}
-- Source IP: {event.get('source_ip', 'unknown')}
-- Action: {event.get('action', 'unknown')}
-- Timestamp: {event.get('timestamp', 'unknown')}
-- User: {event.get('username', 'unknown')}
+- Type: {event_type}
+- Source IP: {source_ip}
+- Action: {action}
+- Timestamp: {timestamp}
+- User: {username}
 
 Raw Event Data:
-{json.dumps(event.get('raw_log', {}), indent=2)}
+{raw_log_str}
 """
         return formatted
     
@@ -42,13 +49,21 @@ Raw Event Data:
         formatted = "Similar Historical Events:\n\n"
         
         for i, event in enumerate(similar_events[:5], 1):  # Limit to top 5
+            distance = event.get('distance', 'unknown')
+            distance_str = f"{distance:.4f}" if isinstance(distance, (int, float)) else str(distance)
+            raw_data_str = json.dumps(event.get('raw_log', {}), indent=2)[:200]
+            event_type = event.get('event_type', 'unknown')
+            source_ip = event.get('source_ip', 'unknown')
+            action = event.get('action', 'unknown')
+            timestamp = event.get('timestamp', 'unknown')
+            
             formatted += f"""
-Event #{i} (Distance: {event.get('distance', 'unknown'):.4f}):
-- Type: {event.get('event_type', 'unknown')}
-- Source IP: {event.get('source_ip', 'unknown')}
-- Action: {event.get('action', 'unknown')}
-- Timestamp: {event.get('timestamp', 'unknown')}
-- Raw Data: {json.dumps(event.get('raw_log', {}), indent=2)[:200]}...
+Event #{i} (Distance: {distance_str}):
+- Type: {event_type}
+- Source IP: {source_ip}
+- Action: {action}
+- Timestamp: {timestamp}
+- Raw Data: {raw_data_str}...
 
 """
         return formatted
@@ -64,16 +79,18 @@ Event #{i} (Distance: {event.get('distance', 'unknown'):.4f}):
         """
         
         # Construct the analysis prompt
-        prompt = f"""You are Sentinel, an AI security analyst specializing in Advanced Persistent Threat (APT) detection. Your job is to analyze security events in the context of historical patterns to identify coordinated attacks that unfold over weeks or months.
+        user_baseline_str = json.dumps(user_baseline or {}, indent=2) if user_baseline else "No baseline available"
+        
+        prompt = """You are Sentinel, an AI security analyst specializing in Advanced Persistent Threat (APT) detection. Your job is to analyze security events in the context of historical patterns to identify coordinated attacks that unfold over weeks or months.
 
 CURRENT EVENT TO ANALYZE:
-{self.format_event_for_analysis(current_event)}
+""" + self.format_event_for_analysis(current_event) + """
 
 HISTORICAL CONTEXT:
-{self.format_similar_events(similar_events)}
+""" + self.format_similar_events(similar_events) + """
 
 USER BASELINE:
-{json.dumps(user_baseline or {}, indent=2) if user_baseline else "No baseline available"}
+""" + user_baseline_str + """
 
 ANALYSIS INSTRUCTIONS:
 1. Look for patterns that suggest this event is part of a larger campaign:
@@ -150,28 +167,86 @@ RESPOND IN THIS EXACT JSON FORMAT:
             
         except ClientError as e:
             logger.error(f"AWS Bedrock error during analysis: {e}")
-            return 0.0, f"Bedrock error: {str(e)}", "monitor"
+            # Fallback to simple rule-based analysis for demo
+            return self._fallback_analysis(current_event, similar_events)
         except Exception as e:
             logger.error(f"Threat analysis error: {e}")
-            return 0.0, f"Analysis error: {str(e)}", "monitor"
+            # Fallback to simple rule-based analysis for demo
+            return self._fallback_analysis(current_event, similar_events)
     
+    def _fallback_analysis(self, current_event: Dict[Any, Any], 
+                          similar_events: List[Dict[Any, Any]]) -> Tuple[float, str, str]:
+        """Fallback rule-based threat analysis for demo when AI is unavailable"""
+        threat_score = 0.0
+        reasoning_parts = []
+        
+        # Check for suspicious indicators
+        source_ip = current_event.get('source_ip', '')
+        event_type = current_event.get('event_type', '')
+        
+        # Suspicious IP ranges (demo IPs)
+        if source_ip in ['203.0.113.15', '198.51.100.42', '192.0.2.100']:
+            threat_score += 3.0
+            reasoning_parts.append(f"Suspicious IP address detected: {source_ip}")
+        
+        # Authentication failures
+        auth_info = current_event.get('auth', {})
+        if not auth_info.get('success', True):
+            threat_score += 2.0
+            attempts = auth_info.get('attempts', 1)
+            if attempts > 3:
+                threat_score += 1.0
+                reasoning_parts.append(f"Multiple failed authentication attempts: {attempts}")
+            else:
+                reasoning_parts.append("Failed authentication detected")
+        
+        # Check for similar events in history
+        if similar_events:
+            similar_count = len([e for e in similar_events if e.get('distance', 1.0) < 0.3])
+            if similar_count >= 3:
+                threat_score += 2.0
+                reasoning_parts.append(f"Found {similar_count} similar historical events suggesting pattern")
+        
+        # Determine action based on score
+        if threat_score >= 7.0:
+            action = "block_ip"
+        elif threat_score >= 5.0:
+            action = "alert"
+        elif threat_score >= 3.0:
+            action = "monitor"
+        else:
+            action = "monitor"
+        
+        if not reasoning_parts:
+            reasoning_parts.append("Normal user behavior pattern detected")
+        
+        reasoning = "FALLBACK ANALYSIS: " + ". ".join(reasoning_parts) + f". Calculated threat score: {threat_score}/10"
+        
+        return threat_score, reasoning, action
+
     async def generate_alert_message(self, event: Dict[Any, Any], 
                                    threat_score: float, reasoning: str) -> str:
         """Generate a human-readable alert message"""
+        event_type = event.get('event_type', 'Unknown')
+        source_ip = event.get('source_ip', 'Unknown')
+        username = event.get('username', 'Unknown')
+        timestamp = event.get('timestamp', 'Unknown')
+        event_id = event.get('event_id', 'Unknown')
+        
         return f"""
 🚨 SENTINEL THREAT ALERT 🚨
 
 Threat Score: {threat_score}/10
-Event Type: {event.get('event_type', 'Unknown')}
-Source IP: {event.get('source_ip', 'Unknown')}
-User: {event.get('username', 'Unknown')}
-Timestamp: {event.get('timestamp', 'Unknown')}
+Event Type: {event_type}
+Source IP: {source_ip}
+User: {username}
+Timestamp: {timestamp}
 
 Analysis:
 {reasoning}
 
 This alert was generated by Sentinel's AI agent based on historical pattern analysis.
-Event ID: {event.get('event_id', 'Unknown')}
+Event ID: {event_id}
 """
 
 

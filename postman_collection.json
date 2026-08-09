@@ -1,0 +1,354 @@
+{
+  "info": {
+    "name": "Sentinel Threat Hunter API",
+    "description": "Complete API test collection for Sentinel with authentication, events, and threat analysis",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health & Status",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "Check if API is healthy and running"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/status",
+              "host": ["{{base_url}}"],
+              "path": ["status"]
+            },
+            "description": "Get detailed system status"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Dashboard Data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/dashboard",
+              "host": ["{{base_url}}"],
+              "path": ["dashboard"]
+            },
+            "description": "Get dashboard statistics"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "Get Recent Events - Last 24h",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/events?hours=24&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["events"],
+              "query": [
+                {
+                  "key": "hours",
+                  "value": "24"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get recent events from last 24 hours"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Recent Events - Last 7 days",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/events?hours=168&limit=50",
+              "host": ["{{base_url}}"],
+              "path": ["events"],
+              "query": [
+                {
+                  "key": "hours",
+                  "value": "168"
+                },
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            },
+            "description": "Get events from last 7 days"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Recent Events - Last 90 days",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/events?hours=2160&limit=100",
+              "host": ["{{base_url}}"],
+              "path": ["events"],
+              "query": [
+                {
+                  "key": "hours",
+                  "value": "2160"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "Get events from last 90 days"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Simulate Events",
+      "item": [
+        {
+          "name": "Simulate - Low Threat (Normal Login)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_data\": {\n    \"event_type\": \"authentication\",\n    \"action\": \"login_attempt\",\n    \"source_ip\": \"192.168.1.100\",\n    \"username\": \"alice.johnson\",\n    \"timestamp\": \"{{$timestamp}}\",\n    \"auth\": {\n      \"success\": true,\n      \"method\": \"password\",\n      \"attempts\": 1\n    },\n    \"user_agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\",\n    \"geo_location\": {\n      \"country\": \"United States\",\n      \"city\": \"San Francisco\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/simulate",
+              "host": ["{{base_url}}"],
+              "path": ["simulate"]
+            },
+            "description": "Simulate normal login from trusted location"
+          },
+          "response": []
+        },
+        {
+          "name": "Simulate - Medium Threat (Suspicious IP)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_data\": {\n    \"event_type\": \"authentication\",\n    \"action\": \"login_attempt\",\n    \"source_ip\": \"198.51.100.42\",\n    \"username\": \"bob.smith\",\n    \"timestamp\": \"{{$timestamp}}\",\n    \"auth\": {\n      \"success\": false,\n      \"method\": \"password\",\n      \"attempts\": 3\n    },\n    \"user_agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\",\n    \"geo_location\": {\n      \"country\": \"Russia\",\n      \"city\": \"Moscow\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/simulate",
+              "host": ["{{base_url}}"],
+              "path": ["simulate"]
+            },
+            "description": "Simulate suspicious login from foreign IP"
+          },
+          "response": []
+        },
+        {
+          "name": "Simulate - High Threat (Credential Stuffing)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_data\": {\n    \"event_type\": \"authentication\",\n    \"action\": \"login_attempt\",\n    \"source_ip\": \"203.0.113.15\",\n    \"username\": \"carol.davis\",\n    \"timestamp\": \"{{$timestamp}}\",\n    \"auth\": {\n      \"success\": false,\n      \"method\": \"password\",\n      \"attempts\": 5\n    },\n    \"user_agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\",\n    \"geo_location\": {\n      \"country\": \"China\",\n      \"city\": \"Beijing\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/simulate",
+              "host": ["{{base_url}}"],
+              "path": ["simulate"]
+            },
+            "description": "Simulate high-threat credential stuffing attack"
+          },
+          "response": []
+        },
+        {
+          "name": "Simulate - Critical Threat (Coordinated Attack)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_data\": {\n    \"event_type\": \"authentication\",\n    \"action\": \"login_attempt\",\n    \"source_ip\": \"192.0.2.100\",\n    \"username\": \"david.wilson\",\n    \"timestamp\": \"{{$timestamp}}\",\n    \"auth\": {\n      \"success\": false,\n      \"method\": \"password\",\n      \"attempts\": 8\n    },\n    \"user_agent\": \"curl/7.64.1\",\n    \"geo_location\": {\n      \"country\": \"Unknown\",\n      \"city\": \"Unknown\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/simulate",
+              "host": ["{{base_url}}"],
+              "path": ["simulate"]
+            },
+            "description": "Simulate critical coordinated attack pattern"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Load Testing - 100 Users",
+      "item": [
+        {
+          "name": "Setup - Generate User List",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Generate 100 unique users and store in environment",
+                  "const users = [];",
+                  "const ips = ['192.168.1.', '10.0.0.', '172.16.0.', '203.0.113.', '198.51.100.', '192.0.2.'];",
+                  "const countries = ['United States', 'United Kingdom', 'Germany', 'France', 'Russia', 'China', 'India', 'Brazil'];",
+                  "",
+                  "for (let i = 1; i <= 100; i++) {",
+                  "  const ipPrefix = ips[Math.floor(Math.random() * ips.length)];",
+                  "  const ipSuffix = Math.floor(Math.random() * 254) + 1;",
+                  "  const country = countries[Math.floor(Math.random() * countries.length)];",
+                  "  ",
+                  "  users.push({",
+                  "    id: i,",
+                  "    username: `user${i}@sentinel.local`,",
+                  "    ip: ipPrefix + ipSuffix,",
+                  "    country: country,",
+                  "    threatLevel: i % 3 === 0 ? 'high' : (i % 2 === 0 ? 'medium' : 'low')",
+                  "  });",
+                  "}",
+                  "",
+                  "pm.environment.set('users_list', JSON.stringify(users));",
+                  "console.log('Generated 100 users for load testing');",
+                  "pm.test('Users generated successfully', function() {",
+                  "  pm.expect(users.length).to.equal(100);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Load Test - Create 100 Events (Sequential)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "// Setup for sequential load test",
+                  "const users = JSON.parse(pm.environment.get('users_list'));",
+                  "const iteration = pm.environment.get('current_iteration') || 0;",
+                  "const user = users[iteration % 100];",
+                  "",
+                  "// Set current user data",
+                  "pm.environment.set('current_user_id', iteration % 100);",
+                  "pm.environment.set('current_username', user.username);",
+                  "pm.environment.set('current_ip', user.ip);",
+                  "pm.environment.set('current_country', user.country);",
+                  "pm.environment.set('threat_attempts', user.threatLevel === 'high' ? 8 : (user.threatLevel === 'medium' ? 3 : 1));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const iteration = parseInt(pm.environment.get('current_iteration') || 0);",
+                  "pm.environment.set('current_iteration', iteration + 1);",
+                  "",
+                  "pm.test('Event created successfully', function() {",
+                  "  pm.response.to.have.status(200);",
+                  "  pm.expect(pm.response.json().success).to.be.true;",
+                  "});",
+                  "",
+                  "if (pm.response.ok) {",
+                  "  const result = pm.response.json().simulation_result;",
+                  "  console.log(`User ${iteration + 1}/100: Threat ${result.threat_score}, Action: ${result.action_taken}`);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_data\": {\n    \"event_type\": \"authentication\",\n    \"action\": \"login_attempt\",\n    \"source_ip\": \"{{current_ip}}\",\n    \"username\": \"{{current_username}}\",\n    \"timestamp\": \"{{$timestamp}}\",\n    \"auth\": {\n      \"success\": false,\n      \"method\": \"password\",\n      \"attempts\": {{threat_attempts}}\n    },\n    \"user_agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\",\n    \"geo_location\": {\n      \"country\": \"{{current_country}}\",\n      \"city\": \"Unknown\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/simulate",
+              "host": ["{{base_url}}"],
+              "path": ["simulate"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "current_iteration",
+      "value": "0",
+      "type": "string"
+    }
+  ]
+}
