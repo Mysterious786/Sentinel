@@ -48,6 +48,34 @@ cd frontend && npm start
 # Visit http://localhost:3000
 ```
 
+## 🎥 Video Demo Quick Start
+
+**For live demonstrations, use this workflow:**
+
+1. **Terminal 1 - Start Backend**
+   ```bash
+   python local_server.py
+   ```
+   Wait for "Server running on http://localhost:8000"
+
+2. **Terminal 2 - Start Frontend**
+   ```bash
+   cd frontend && npm start
+   ```
+   Wait for React to open browser at http://localhost:3000
+
+3. **Terminal 3 - Run Automated Demo**
+   ```bash
+   python auto_demo.py
+   ```
+   Watch the dashboard update in real-time with 5 threat events over 20 seconds.
+
+**For Load Testing Demo:**
+```bash
+python load_test_100_users.py --mode sequential
+```
+Shows 100 users triggering threats with real-time dashboard updates and performance metrics.
+
 ## 🏗️ Architecture
 
 ### Agent Workflow
@@ -177,11 +205,61 @@ npm start               # Frontend (in /frontend)
 3. **Transparent AI**: Explainable reasoning for every security decision
 4. **Autonomous Response**: Takes action and learns from outcomes
 
+## 🧪 Testing & Quality Assurance
+
+### 200 Comprehensive Test Cases
+```bash
+python run_200_tests.py
+```
+Validates:
+- API health and status endpoints
+- All threat simulation scenarios  
+- Response structure and validation
+- Error handling and edge cases
+- Performance under load
+- Concurrent request handling
+- Data validation and type safety
+
+📖 See `TEST_SUITE_README.md` for test breakdown and `RUN_200_TESTS_COMMAND.md` for commands.
+
+### Load Testing
+```bash
+# 100 concurrent users (sequential mode for visibility)
+python load_test_100_users.py --mode sequential
+
+# 10-worker concurrent mode (higher throughput)
+python load_test_100_users.py --mode concurrent --workers 10
+```
+
+### API Testing with Postman
+Import `postman_collection.json` into Postman for interactive API exploration with 15+ pre-built request scenarios.
+
+## 🎬 Demo Automation
+
+### Quick 5-Event Demo (20 seconds)
+```bash
+python auto_demo.py
+```
+Automatically simulates 5 different threat events with 3-second pauses, showing real-time detection and dashboard updates.
+
+### Interactive Demo Mode
+```bash
+python demo_mode.py
+```
+Choose from:
+- Credential stuffing attack
+- Lateral movement detection
+- Multi-vector attack scenario
+- Custom event simulation
+
 ## 📚 Documentation
 
 - `ARCHITECTURE.md` - Technical deep dive and implementation details
 - `CREDENTIALS_SETUP.md` - Step-by-step credential configuration  
-- `DEMO.md` - Presentation guide and demo scenarios
+- `DEMO_VIDEO_GUIDE.md` - Complete video production strategy
+- `QUICK_DEMO_SCRIPT.md` - 2-minute focused demo script
+- `DEMO_CHEAT_SHEET.md` - Quick reference for live demos
+- `TEST_SUITE_README.md` - Test suite documentation
 - `PROJECT_SUMMARY.md` - Complete implementation overview
 
 ## 🤝 Contributing
